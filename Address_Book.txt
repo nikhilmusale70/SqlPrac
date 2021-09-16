@@ -49,4 +49,6 @@ UPDATE details SET AddBookName ='MyFamily';
  SELECT COUNT(*) FROM details WHERE AddBookType = 'Family';
 
 \\uc11
+INSERT INTO details(First_Name,Last_Name,AddBookName,AddBookType,Address,City,State,Zip,PhoneNumber,Email) VALUES
+    -> ('Mon', 'Tue', 'MyFamily', 'Family' , 'kejncjc' , 'Mumbai', 'MH', 442564, 789456122, 'kjcsnkcja@gmail.com');
 
