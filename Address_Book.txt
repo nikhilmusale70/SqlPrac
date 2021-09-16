@@ -25,3 +25,28 @@ INSERT INTO details(First_Name,Last_Name,Address,City,State,Zip,PhoneNumber,Emai
 
 \\uc4
  UPDATE details SET Last_Name = 'Bhangale' where First_Name = 'Devesh';
+
+\\uc5
+DELETE FROM details WHERE First_Name = 'Devesh';
+
+\\uc6
+SELECT * FROM details WHERE City='Chandrapur';
+
+\\uc7
+SELECT COUNT(*) From details WHERE CITY='Chandrapur';
+
+\\uc8
+SELECT * FROM details WHERE City='Chandrapur' ORDER BY First_Name ASC;
+
+\\uc9
+ALTER TABLE details
+    -> ADD AddBookName VARCHAR(20) AFTER Last_Name,
+    -> ADD AddBookType VARCHAR(20) AFTER AddBookName;
+UPDATE details SET AddBookType ='Family';
+UPDATE details SET AddBookName ='MyFamily';
+
+\\uc10
+ SELECT COUNT(*) FROM details WHERE AddBookType = 'Family';
+
+\\uc11
+
