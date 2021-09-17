@@ -52,3 +52,59 @@ UPDATE details SET AddBookName ='MyFamily';
 INSERT INTO details(First_Name,Last_Name,AddBookName,AddBookType,Address,City,State,Zip,PhoneNumber,Email) VALUES
     -> ('Mon', 'Tue', 'MyFamily', 'Family' , 'kejncjc' , 'Mumbai', 'MH', 442564, 789456122, 'kjcsnkcja@gmail.com');
 
+\\UC12
+CREATE DATABASE addressBook;
+USE addressBook
+
+CREATE TABLE address (
+    -> city VARCHAR(20) NOT NULL,
+    -> state VARCHAR(20) NOT NULL,
+    -> zipCode BIGINT NOT NULL,
+    -> addId INT NOT NULL PRIMARY KEY,
+    -> FOREIGN KEY(addId) REFERENCES personDetails(personId)
+    -> );
+
+CREATE TABLE book(
+    -> bookId INT NOT NULL PRIMARY KEY,
+    -> bookName VARCHAR(20) NOT NULL
+    -> );
+
+CREATE TABLE personDetails (
+    -> personId INT NOT NULL AUTO_INCREMENT,
+    -> email VARCHAR(20) NOT NULL,
+    -> fName VARCHAR(20) NOT NULL,
+    -> lName VARCHAR(20) NOT NULL,
+    -> phone BIGINT NOT NULL,
+    -> PRIMARY KEY (personId));
+
+INSERT INTO personDetails (email,fName,lName,phone) VALUES
+    -> ('nikhil@gmail.com','Nikhil','Musale',987654321),
+    -> ('devesh@qwerty.com','devesh','xyz',123456789),
+    -> ('qwerty@mik.com','wertyu','qwe',12345678);
+
+INSERT INTO book (bookId,bookName) VALUES
+    -> (1,'first'),
+    -> (2,'second'),
+    -> (3,'third');
+
+INSERT INTO address(city,state,zipCode,addId) VALUES
+     ('chandrapur','Maharashtra',442401,1),
+     ('ngp','Maharashtra',778899,2),
+     ('qwe','wertyu',774411,3);
+
+//uc12
+
+SELECT fName from personDetails ORDER BY fName;
+
+
+
+
+
+
+
+
+
+
+
+
+

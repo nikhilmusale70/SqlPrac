@@ -44,6 +44,98 @@ SELECT name,salary FROM employee_payroll WHERE salary=(SELECT MAX(salary) from e
 
 SELECT COUNT(gender) FROM employee_payroll where gender ='m';
 
+//uc8
+
+ALTER TABLE employee_payroll ADD phone_number BIGINT AFTER name;
+ALTER TABLE employee_payroll ADD department VARCHAR(30) NOT NULL after phone_number;
+ALTER TABLE employee_payroll ADD address VARCHAR(30) AFTER phone_number;
+ALTER TABLE employee_payroll ALTER address SET DEFAULT 'TBD';
+
+//uc9
+
+ALTER TABLE employee_payroll RENAME COLUMN salary TO basic_pay;
+ALTER TABLE employee_payroll ADD deductions double NOT NULL AFTER basic_pay;
+ALTER TABLE employee_payroll ADD taxable_pay double NOT NULL AFTER deductions;
+ALTER TABLE employee_payroll ADD income_tax double NOT NULL AFTER taxable_pay;
+ALTER TABLE employee_payroll ADD net_pay double NOT NULL AFTER income_tax;
+
+\\uc10
+
+UPDATE employee_payroll SET department = 'Sales' WHERE id = 2;
+INSERT INTO employee_payroll(name,department,gender,basic_pay,deductions,taxable_pay,income_tax,net_pay,start) values
+('Terissa','Marketing','F',1000000,50000.00,200000,100000,1200000,'2020-12-09');
+
+//uc11
+
+alter table employee_payroll drop column department,
+     drop column basic_pay,
+     drop column taxable_pay,
+     drop column net_pay,
+     drop column deductions,
+     drop column income_tax,
+     drop column address;
+alter table employee_payroll rename column id to emp_id;
+
+create table department
+     (
+     dept_id Int not null auto_increment,
+     dept_name varchar(30) not null,
+     Primary key(dept_id)
+     );
+create table address
+     (
+     emp_id int unsigned not null,
+     residence_address varchar(250) not null,
+     city varchar(30) not null,
+     state varchar(30) not null,
+     country varchar(30) not null,
+     zip int not null,
+     primary key (emp_id),
+     Foreign key (emp_id) references employee_payroll(emp_id)
+     );
+create table payroll
+     (
+     emp_id int unsigned not null,
+     basic_pay double not null,
+     deductions double not null,
+     taxable_pay double not null,
+     income_tax double not null,
+     net_pay double not null,
+     Primary key(emp_id),
+     Foreign key(emp_id) references employee_payroll(emp_id)
+     );
+create table company
+     (
+     emp_id int unsigned not null,
+     dept_id int not null,
+     Primary key(emp_id,dept_id),
+     Foreign key(emp_id) references employee_payroll(emp_id),
+     Foreign key(dept_id) references department(dept_id)
+     );
+alter table employee_payroll rename to employee;
+insert into department(dept_id,dept_name) values
+     (1,'Finance'),
+     (2,'Sales'),
+     (3,'Marketing'),
+     (4,'IT');
+show tables;
+
+insert into company (emp_id,dept_id) values
+     (1,1),
+     (2,4),
+     (3,2),
+     (4,3);
+insert into payroll (emp_id,basic_pay,deductions,taxable_pay,income_tax,net_pay) values
+     (1,500000,50000,550000,40000,400000),
+     (2,600000,60000,650000,50000,500000),
+     (3,400000,50000,560000,35000,300000),
+     (4,300000,40000,400000,30000,350000);
+insert into address(emp_id,residence_address,city,state,country,zip) values
+     (1,'indust','chandrapur','Maharashtra','India',442401),
+     (2,'estate','Nagpur','Maharashtra','India',448512),
+     (3,'mul road','mumbai','delhi','India',778899),
+     (4,'chand','chandrapur','Maharashtra','India',456521);
+
 
 
 
